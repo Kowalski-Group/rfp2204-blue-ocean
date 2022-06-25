@@ -1,3 +1,29 @@
+# Kowalski dev initial setup
+
+This is to start dev initial setup to install all dependencies.
+
+## Setup
+
+Navigate to your local directory where you would like to store the repo,
+then git clone with the following command in terminal:
+```bash
+git clone https://github.com/Kowalski-Group/rfp2204-blue-ocean.git
+```
+
+Inside your local repo directory, install pnpm:
+```bash
+npm install -g pnpm
+```
+
+And then use pnpm to install setups:
+```bash
+pnpm install
+```
+
+Start the dev server, see package.json for more scripts:
+```bash
+pnpm dev
+```
 # Next.js + Cypress
 
 This example shows how to configure Cypress to work with Next.js.
