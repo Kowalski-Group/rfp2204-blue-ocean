@@ -1,9 +1,16 @@
+import React from 'react';
 import "../styles/globals.css";
-import React from "react";
-import PropTypes from "prop-types";
+import { UserProvider } from '@auth0/nextjs-auth0';
 
-function App({ Component, pageProps }) {
-  return <Component {...pageProps} />;
+function MyApp({ Component, pageProps }) {
+
+  const { user } = pageProps;
+
+  return (
+    <UserProvider user={user}>
+      <Component {...pageProps} />
+    </UserProvider>
+  );
 }
 
 App.propTypes = {
