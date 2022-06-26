@@ -12,7 +12,7 @@ export default function Avatar() {
       faceapi.nets.faceLandmark68Net.loadFromUri("/models"),
       faceapi.nets.faceRecognitionNet.loadFromUri("/models"),
       faceapi.nets.faceExpressionNet.loadFromUri("/models"),
-    ]).then(() => console.log("complete"));
+    ]).then(() => {});
   }
   const webcam = useRef(null);
 
@@ -88,7 +88,6 @@ export default function Avatar() {
             </div>
           </div>
         </div>
-
         <p>
           <Link href="/">
             <a>&larr; Go Back</a>
