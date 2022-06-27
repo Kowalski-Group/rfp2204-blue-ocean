@@ -1,19 +1,7 @@
-import React from 'react';
-import styles from "../../styles/Home.module.css";
+import React from "react";
 
-function Container({ children, className, ...rest}) {
-
-  let containerClassName = styles.container;
-
-  if ( className ) {
-    containerClassName = `${containerClassName} ${className}`;
-  }
-
-  return (
-    <div className={containerClassName} {...rest}>
-      { children }
-    </div>
-  )
+function Container() {
+  return <div>This is a container.</div>;
 }
 
 export default Container;

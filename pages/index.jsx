@@ -1,13 +1,12 @@
-import React from "react"
-import Head from 'next/head'
-import Image from 'next/image'
-import Link from 'next/link'
+import React from "react";
+import Head from "next/head";
+import Image from "next/image";
+import Link from "next/link";
 
-import Layout from '../components/Layout/Layout'
-import Container from '../components/Container/Container'
+import Layout from "../components/Layout/Layout";
+import Container from "../components/Container/Container";
 
-import styles from '../styles/Home.module.css'
-
+import styles from "../styles/Home.module.css";
 
 export default function Home() {
   return (
@@ -26,7 +25,7 @@ export default function Home() {
             </h1>
 
             <p className={styles.description}>
-              Get started by editing{' '}
+              Get started by editing{" "}
               <code className={styles.code}>pages/index.js</code>
             </p>
 
@@ -45,7 +44,9 @@ export default function Home() {
 
               <a href="https://nextjs.org/learn" className={styles.card}>
                 <h2>Learn &rarr;</h2>
-                <p>Learn about Next.js in an interactive course with quizzes!</p>
+                <p>
+                  Learn about Next.js in an interactive course with quizzes!
+                </p>
               </a>
 
               <a
@@ -62,7 +63,8 @@ export default function Home() {
               >
                 <h2>Deploy &rarr;</h2>
                 <p>
-                  Instantly deploy your Next.js site to a public URL with Vercel.
+                  Instantly deploy your Next.js site to a public URL with
+                  Vercel.
                 </p>
               </a>
             </div>
@@ -74,14 +76,19 @@ export default function Home() {
               target="_blank"
               rel="noopener noreferrer"
             >
-              Powered by{' '}
+              Powered by{" "}
               <span className={styles.logo}>
-                <Image src="/vercel.svg" alt="Vercel Logo" width={72} height={16} />
+                <Image
+                  src="/vercel.svg"
+                  alt="Vercel Logo"
+                  width={72}
+                  height={16}
+                />
               </span>
             </a>
           </footer>
         </div>
       </Container>
     </Layout>
-  )
+  );
 }
