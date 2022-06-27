@@ -8,6 +8,7 @@ function Layout() {
   return (
     <div>
       <Head>
+        <title>Sweet Niblets</title>
         <link rel="icon" href="/favicon.ico" />
       </Head>
       <Header />
