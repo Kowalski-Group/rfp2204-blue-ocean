@@ -7,7 +7,7 @@ function MyApp({ Component, pageProps }) {
   const { user } = pageProps;
 
   return (
-    <UserProvider user={user}>
+    <UserProvider >
       <Component {...pageProps} />
     </UserProvider>
   );
