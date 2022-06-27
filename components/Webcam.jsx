@@ -25,11 +25,11 @@ export default function Webcam({ onPlay, videoRef }) {
       faceapi.nets.faceRecognitionNet.loadFromUri("/models"),
       faceapi.nets.faceExpressionNet.loadFromUri("/models"),
     ]);
-    console.log("models loaded");
+    // console.log("models loaded");
   };
 
   useEffect(() => {
-    console.log("Webcam useEffect");
+    // console.log("Webcam useEffect");
     async function setupWebcamVideo() {
       if (!mediaStream) {
         await setupMediaStream();
