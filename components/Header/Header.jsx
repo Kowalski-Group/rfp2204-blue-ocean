@@ -1,13 +1,13 @@
-import React from 'react';
+import React from "react";
+import Button from "../Button/Button.jsx";
 
 function Header() {
   return (
     <header>
-      <p>
-        this a Header
-      </p>
+      {/* <Button styles="button"></Button> */}
+      <a href="/api/auth/login">Login</a>
     </header>
-  )
+  );
 }
 
 export default Header;
