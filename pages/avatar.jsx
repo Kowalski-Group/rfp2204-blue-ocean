@@ -4,24 +4,29 @@ import Webcam from "react-webcam";
 import * as faceapi from "face-api.js";
 
 export default function Avatar() {
-  if (faceapi) {
-    Promise.all([
+  // const [isLoading, setIsLoading] = useState(true);
+
+  const loadVideoModels = async () => {
+    await Promise.all([
       faceapi.nets.tinyFaceDetector.loadFromUri("/models"),
       faceapi.nets.faceLandmark68Net.loadFromUri("/models"),
       faceapi.nets.faceRecognitionNet.loadFromUri("/models"),
       faceapi.nets.faceExpressionNet.loadFromUri("/models"),
-    ]).then(() => {
-      console.log("models loaded");
-    });
-  }
+    ]);
+    console.log("models loaded");
+  };
 
-  console.log(faceapi);
+  const handleVideoStart = async () => {
+    await loadVideoModels();
+  };
+
   const webcam = useRef(null);
   return (
     <>
       <h1 className="text-3xl font-bold underline">Build Your Avatar</h1>
       <div className="relative">
         <Webcam
+          onPlay={handleVideoStart}
           audio={false}
           ref={webcam}
           style={{
@@ -42,4 +47,10 @@ export default function Avatar() {
       </p>
     </>
   );
+}
+
+export async function getServerSideProps() {
+  return {
+    props: {}, // will be passed to the page component as props
+  };
 }
