@@ -4,6 +4,17 @@ import Webcam from "react-webcam";
 import * as faceapi from "face-api.js";
 
 export default function Avatar() {
+  if (faceapi) {
+    Promise.all([
+      faceapi.nets.tinyFaceDetector.loadFromUri("/models"),
+      faceapi.nets.faceLandmark68Net.loadFromUri("/models"),
+      faceapi.nets.faceRecognitionNet.loadFromUri("/models"),
+      faceapi.nets.faceExpressionNet.loadFromUri("/models"),
+    ]).then(() => {
+      console.log("models loaded");
+    });
+  }
+
   console.log(faceapi);
   const webcam = useRef(null);
   return (
