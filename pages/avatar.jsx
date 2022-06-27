@@ -7,8 +7,8 @@ export default function Avatar() {
   const videoRef = useRef(null);
 
   const onPlay = () => {
-    console.log("video play event");
-    console.log("canvas", canvasRef.current);
+    // console.log("video play event");
+    // console.log("canvas", canvasRef.current);
 
     setInterval(async () => {
       const canvas = canvasRef.current;
@@ -32,7 +32,7 @@ export default function Avatar() {
       faceapi.draw.drawFaceLandmarks(canvas, resizedDetections);
       faceapi.draw.drawFaceExpressions(canvas, resizedDetections);
       // console.log(detections);
-    }, 100);
+    }, 250);
   };
 
   return (
