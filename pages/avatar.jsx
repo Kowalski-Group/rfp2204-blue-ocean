@@ -1,56 +1,47 @@
 import React, { useRef } from "react";
-import Link from "next/link";
-import Webcam from "react-webcam";
 import * as faceapi from "face-api.js";
+import Webcam from "../components/Webcam";
 
 export default function Avatar() {
-  // const [isLoading, setIsLoading] = useState(true);
+  const canvasRef = useRef(null);
+  const videoRef = useRef(null);
 
-  const loadVideoModels = async () => {
-    await Promise.all([
-      faceapi.nets.tinyFaceDetector.loadFromUri("/models"),
-      faceapi.nets.faceLandmark68Net.loadFromUri("/models"),
-      faceapi.nets.faceRecognitionNet.loadFromUri("/models"),
-      faceapi.nets.faceExpressionNet.loadFromUri("/models"),
-    ]);
-    console.log("models loaded");
+  const onPlay = () => {
+    console.log("video play event");
+    console.log("canvas", canvasRef.current);
+
+    setInterval(async () => {
+      const canvas = canvasRef.current;
+      const video = videoRef.current;
+
+      const displaySize = {
+        width: video.getBoundingClientRect().width,
+        height: video.getBoundingClientRect().height,
+      };
+      faceapi.matchDimensions(canvas, displaySize);
+      const detections = await faceapi
+        .detectAllFaces(video, new faceapi.TinyFaceDetectorOptions())
+        .withFaceLandmarks()
+        .withFaceExpressions(); // .withFaceDescriptor()?
+      // console.log(detections);
+      // x pos
+      // console.log(detections[0].landmarks.shift.x); //...landmarks.getMouth()
+      const resizedDetections = faceapi.resizeResults(detections, displaySize);
+      canvas.getContext("2d").clearRect(0, 0, canvas.width, canvas.height);
+      faceapi.draw.drawDetections(canvas, resizedDetections);
+      faceapi.draw.drawFaceLandmarks(canvas, resizedDetections);
+      faceapi.draw.drawFaceExpressions(canvas, resizedDetections);
+      // console.log(detections);
+    }, 100);
   };
 
-  const handleVideoStart = async () => {
-    await loadVideoModels();
-  };
-
-  const webcam = useRef(null);
   return (
-    <>
-      <h1 className="text-3xl font-bold underline">Build Your Avatar</h1>
-      <div className="relative">
-        <Webcam
-          onPlay={handleVideoStart}
-          audio={false}
-          ref={webcam}
-          style={{
-            position: "absolute",
-            margin: "auto",
-            textAlign: "center",
-            top: 100,
-            left: 0,
-            right: 0,
-          }}
-        />
-      </div>
-
-      <p>
-        <Link href="/">
-          <a>&larr; Go Back</a>
-        </Link>
-      </p>
-    </>
+    <div className="relative w-[720px] h-[560px] mx-auto">
+      <Webcam videoRef={videoRef} onPlay={onPlay} />
+      <canvas
+        ref={canvasRef}
+        className="absolute top-0 left-0 right-0 bottom-0"
+      />
+    </div>
   );
-}
-
-export async function getServerSideProps() {
-  return {
-    props: {}, // will be passed to the page component as props
-  };
 }
