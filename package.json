@@ -12,10 +12,12 @@
     "cypress": "cypress open",
     "cypress:headless": "cypress run",
     "e2e": "start-server-and-test dev http://localhost:3000 cypress",
-    "e2e:headless": "start-server-and-test dev http://localhost:3000 cypress:headless"
+    "e2e:headless": "start-server-and-test dev http://localhost:3000 cypress:headless",
+    "prepare": "husky install"
   },
   "dependencies": {
     "next": "latest",
+    "prop-types": "^15.8.1",
     "react": "17.0.2",
     "react-dom": "17.0.2",
     "react-webcam": "^7.0.1",
@@ -33,8 +35,10 @@
     "eslint-plugin-jsx-a11y": "^6.6.0",
     "eslint-plugin-react": "^7.30.1",
     "eslint-plugin-react-hooks": "^4.6.0",
+    "husky": "^8.0.1",
+    "lint-staged": "^13.0.3",
+    "npm-run-all": "^4.1.5",
     "postcss": "^8.4.14",
-    "prop-types": "^15.8.1",
     "start-server-and-test": "1.13.1",
     "tailwindcss": "^3.1.4"
   }
