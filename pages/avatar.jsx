@@ -4,7 +4,18 @@ import Webcam from "react-webcam";
 import * as faceapi from "face-api.js";
 
 export default function Avatar() {
-  const [facePos, setFacePos] = useState({ x: 0, y: 0 }); // TODO set to middle of screen.
+  // if (typeof window !== "undefined") {
+  //   SCREEN_MIDDLE_X = window.innerHeight / 2;
+  //   console.log("mid", SCREEN_MIDDLE_X);
+  // }
+  const FACE_SIZE = 200;
+  // const [screenMiddle, setScreenMiddle] = useState(0); // TODO set to middle of screen.
+  const [nosePoint, setNosePoint] = useState({ x: 0, y: 0 });
+  // const [mouthSize, setMouthSize] = useState(30);
+
+  // useEffect(() => {
+  //   setScreenMiddle(window.innerHeight / 2);
+  // }, []);
 
   if (faceapi) {
     Promise.all([
@@ -34,14 +45,16 @@ export default function Avatar() {
       // console.log(detections[0].landmarks.shift.x); // ...landmarks.getMouth()
       if (!detections) return;
       // console.log("nose", detections[0].landmarks.getNose());
-      // const resizedDetections = faceapi.resizeResults(detections, displaySize);
-      // canvas.getContext("2d").clearRect(0, 0, canvas.width, canvas.height);
-      // faceapi.draw.drawDetections(canvas, resizedDetections);
-      // faceapi.draw.drawFaceLandmarks(canvas, resizedDetections);
-      // faceapi.draw.drawFaceExpressions(canvas, resizedDetections);
+      const resizedDetections = faceapi.resizeResults(detections, displaySize);
+      canvas.getContext("2d").clearRect(0, 0, canvas.width, canvas.height);
+      faceapi.draw.drawDetections(canvas, resizedDetections);
+      faceapi.draw.drawFaceLandmarks(canvas, resizedDetections);
+      faceapi.draw.drawFaceExpressions(canvas, resizedDetections);
       const center = detections.landmarks.positions[33];
-      setFacePos({ x: center.x, y: center.y });
-    }, 1000);
+      setNosePoint({ x: center.x, y: center.y });
+      // setMouthSize(center.x / 10);
+      // console.log(mouthSize);
+    }, 250);
   };
 
   return (
@@ -70,14 +83,25 @@ export default function Avatar() {
             className="bg-yellow-500 rounded-full"
             style={{
               position: "absolute",
-              width: 200,
-              height: 200,
-              top: facePos.y - 50,
-              left: facePos.x - 50,
+              width: FACE_SIZE,
+              height: FACE_SIZE,
+              transform: `translate3d(${nosePoint.x - FACE_SIZE / 2}px, ${
+                nosePoint.y - FACE_SIZE / 2
+              }px, 0px)`,
               transition: "all",
+              transitionDuration: "250ms",
+              transitionTimingFunction: "ease",
+              top: 0,
+              left: 0,
             }}
           >
-            <div id="mouth" className="absolute text-5xl top-2/3 left-20 z-30">
+            <div
+              id="mouth"
+              className="absolute top-2/3 left-20 z-30"
+              style={{
+                fontSize: 60,
+              }}
+            >
               🫦
             </div>
             <div id="eye1" className="absolute text-5xl top-1/3 left-8">

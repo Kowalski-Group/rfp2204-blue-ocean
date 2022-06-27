@@ -17,6 +17,7 @@
   },
   "dependencies": {
     "face-api.js": "^0.22.2",
+    "framer-motion": "^6.3.16",
     "next": "latest",
     "prop-types": "^15.8.1",
     "react": "17.0.2",
