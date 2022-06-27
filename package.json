@@ -16,16 +16,9 @@
     "prepare": "husky install"
   },
   "dependencies": {
-<<<<<<< HEAD
     "face-api.js": "^0.22.2",
     "mongodb": "^4.7.0",
-=======
     "@auth0/nextjs-auth0": "^1.9.1",
-<<<<<<< HEAD
->>>>>>> 9ee9802 (rebase)
-=======
-    "dotenv": "^16.0.1",
->>>>>>> 65dbd51 (Auth0 set up)
     "next": "latest",
     "prop-types": "^15.8.1",
     "react": "17.0.2",

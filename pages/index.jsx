@@ -12,7 +12,6 @@ export default function Home() {
   return (
     <Layout>
       <Container>
-      <a href="/api/auth/login">Login</a>
         <div className={styles.container}>
           <Head>
             <title>Create Next App</title>
