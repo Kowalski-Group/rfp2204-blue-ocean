@@ -16,6 +16,7 @@
     "prepare": "husky install"
   },
   "dependencies": {
+    "@auth0/nextjs-auth0": "^1.9.1",
     "face-api.js": "^0.22.2",
     "mongodb": "^4.7.0",
     "next": "latest",
