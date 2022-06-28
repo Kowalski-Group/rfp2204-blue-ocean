@@ -12,7 +12,9 @@ function Layout() {
         <link rel="icon" href="/favicon.ico" />
       </Head>
       <Header />
-      <main>this is main</main>
+      <body className="flex flex-col min-h-screen">
+        <main className="flex-grow">this is main</main>
+      </body>
       <Footer />
     </div>
   );
