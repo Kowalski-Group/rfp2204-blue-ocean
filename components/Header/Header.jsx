@@ -12,7 +12,7 @@ function Header() {
         <div className="grid grid-flow-col auto-cols-max gap-2">
           <div className="h-20 w-20 relative">
             <Image
-              src="/../public/mic1.png"
+              src="/mic1.png"
               alt="logo"
               layout="fill"
               objectFit="cover"
