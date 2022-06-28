@@ -3,7 +3,7 @@ import Image from "next/image";
 
 function Header() {
   return (
-    <header className="bg-indigo-700 text-white py-6 px-4 grid grid-cols-12 gap-0">
+    <header className="bg-indigo-700 text-white py-6 px-4 grid grid-flow-col auto-cols-max gap-2">
       <div className="h-20 w-20 relative ">
         <Image
           src="/../public/mic1.png"
@@ -14,7 +14,7 @@ function Header() {
         />
       </div>
       <div className="col-span-3">
-        <h1 className="text-4xl  font-Audiowide"> Sweet Niblets</h1>
+        <h1 className="text-4xl font-Audiowide"> Sweet Niblets</h1>
 
         <p>Let&apos;s sing together</p>
       </div>
