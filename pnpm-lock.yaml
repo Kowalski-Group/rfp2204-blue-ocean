@@ -20,6 +20,8 @@ specifiers:
   next: latest
   npm-run-all: ^4.1.5
   postcss: ^8.4.14
+  prettier: ^2.7.1
+  prettier-cli: ^0.1.0
   prop-types: ^15.8.1
   react: 17.0.2
   react-dom: 17.0.2
@@ -34,6 +36,11 @@ dependencies:
   face-api.js: 0.22.2
   mongodb: 4.7.0
   next: 12.2.0_sfoxds7t5ydpegc3knd667wn6m
+<<<<<<< HEAD
+=======
+  prettier: 2.7.1
+  prettier-cli: 0.1.0
+>>>>>>> stage
   prop-types: 15.8.1
   react: 17.0.2
   react-dom: 17.0.2_react@17.0.2
@@ -349,6 +356,11 @@ packages:
     dependencies:
       defer-to-connect: 2.0.1
     dev: false
+
+  /@swc/helpers/0.4.2:
+    resolution: {integrity: sha512-556Az0VX7WR6UdoTn4htt/l3zPQ7bsQWK+HqdG4swV7beUCxo/BqmvbOpUkTIm/9ih86LIf1qsUnywNL3obGHw==}
+    dependencies:
+      tslib: 2.4.0
 
   /@tensorflow/tfjs-core/1.7.0:
     resolution: {integrity: sha512-uwQdiklNjqBnHPeseOdG0sGxrI3+d6lybaKu2+ou3ajVeKdPEwpWbgqA6iHjq1iylnOGkgkbbnQ6r2lwkiIIHw==}
@@ -3234,6 +3246,16 @@ packages:
     resolution: {integrity: sha512-vkcDPrRZo1QZLbn5RLGPpg/WmIQ65qoWWhcGKf/b5eplkkarX0m9z8ppCat4mlOqUsWpyNuYgO3VRyrYHSzX5g==}
     engines: {node: '>= 0.8.0'}
     dev: true
+
+  /prettier-cli/0.1.0:
+    resolution: {integrity: sha512-FzI6Hs9/YsrVCuxpcO0VG7sBQT7LWpeETEV0SzAFyNgb7oFjnnVf0CCYHieGI9B1RsgyaiH9HCUXYPluHRV0gw==}
+    dev: false
+
+  /prettier/2.7.1:
+    resolution: {integrity: sha512-ujppO+MkdPqoVINuDFDRLClm7D78qbDt0/NR+wp5FqEZOoTNAjPHWj17QRhu7geIHJfcNhRk1XVQmF8Bp3ye+g==}
+    engines: {node: '>=10.13.0'}
+    hasBin: true
+    dev: false
 
   /pretty-bytes/5.6.0:
     resolution: {integrity: sha512-FFw039TmrBqFK8ma/7OL3sDz/VytdtJr044/QUJtH0wK9lb9jLq9tJyIxUwtQJHwar2BqtiA4iCWSwo9JLkzFg==}
