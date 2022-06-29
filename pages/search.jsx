@@ -5,10 +5,10 @@ import React from "react";
 // import Container from '../components/Container/Container';
 import SearchBar from "../components/SearchBar";
 
-export default function Home() {
-  return (
-    <div className="flex">
-      <SearchBar />
-    </div>
-  );
+export default function Search() {
+	return (
+		<div className='flex'>
+			<SearchBar />
+		</div>
+	);
 }
