@@ -1,19 +1,14 @@
-import React, { useContext, useState, useEffect } from 'react';
+/* eslint-disable react-hooks/rules-of-hooks */
+import React from 'react';
 import YouTube from 'react-youtube';
+import { useWindowSize } from 'react-use';
+import Confetti from 'react-confetti';
 import Image from 'next/image';
 
 import Layout from '../components/Layout/Layout';
-import { videoIdContext } from './_app';
+import useRecorder from './api/useRecorder';
 
 export default function Play() {
-	const [Loaded, setLoaded] = useState(false);
-
-	const currentVideoId = useContext(videoIdContext);
-	useEffect(() => {
-		if (currentVideoId !== null) {
-			setLoaded(true);
-		}
-	}, [currentVideoId]);
 	const opts = {
 		playerVars: {
 			controls: 1,
@@ -23,9 +18,12 @@ export default function Play() {
 		},
 	};
 
+	const { width, height } = useWindowSize();
+	const [audioURL, isRecording, startRecording, stopRecording] = useRecorder();
 	return (
 		<Layout>
 			<div className='relative w-[100vw] h-[80vh] flex items-center justify-center'>
+				<Confetti width={width} height={height} />
 				<Image
 					className='object-cover w-full scale-125'
 					src='/karaoke-background.jpg'
@@ -34,9 +32,20 @@ export default function Play() {
 				/>
 				<YouTube
 					className='absolute top-[40%] object-cover mx-auto'
-					videoId={Loaded === true ? currentVideoId : 'rMSQwIp4Jg8'}
+					videoId='rMSQwIp4Jg8'
 					opts={opts}
 				/>
+			</div>
+			<div>
+				<audio src={audioURL} controls>
+					<track kind='captions' />
+				</audio>
+				<button type='button' onClick={startRecording} disabled={isRecording}>
+					start recording
+				</button>
+				<button type='button' onClick={stopRecording} disabled={!isRecording}>
+					stop recording
+				</button>
 			</div>
 		</Layout>
 	);
