@@ -7,12 +7,12 @@ import Footer from "../Footer/Footer";
 
 function Layout({ children }) {
   return (
-    <div>
+    <div className="flex flex-col">
       <Head>
         <link rel="icon" href="/favicon.ico" />
       </Head>
       <Header />
-      <body className="flex flex-col min-h-screen">
+      <body className="flex flex-col">
         <main className="flex-grow">{children}</main>
       </body>
       <Footer />
