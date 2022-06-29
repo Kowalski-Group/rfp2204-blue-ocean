@@ -16,9 +16,9 @@ export default function play() {
 
   return (
     <Layout>
-      <div className="relative w-[100vw] h-[100vh] flex items-center justify-center">
+      <div className="relative w-[100vw] h-[80vh] flex items-center justify-center">
         <Image
-          className="object-cover w-full h-60 scale-125"
+          className="object-cover w-full scale-125"
           src="/karaoke-background.jpg"
           alt="logo"
           layout="fill"

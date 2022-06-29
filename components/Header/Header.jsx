@@ -7,22 +7,24 @@ function Header() {
   const { user } = useUser();
 
   return (
-    <header className="bg-indigo-700 text-white py-10 px-4">
+    <header className="bg-indigo-700 text-white py-4 px-4">
       <div className="flex flex-row justify-between">
         <div className="grid grid-flow-col auto-cols-max gap-2">
-          <div className="h-20 w-20 relative">
+          <div className="w-16 relative">
             <Image
-              src="/mic1.png"
+              src="/logo-avatar.png"
               alt="logo"
               layout="fill"
-              objectFit="cover"
+              objectFit="contain"
               className="rounded-full col-start-1"
             />
           </div>
           <div className="col-span-3">
-            <h1 className="text-4xl font-Audiowide"> Sweet Niblets</h1>
+            <h1 className="text-3xl font-Audiowide"> Sweet Niblets</h1>
 
-            <p>Let&apos;s sing together</p>
+            <p className="text-sm uppercase tracking-widest">
+              Let&apos;s sing together
+            </p>
           </div>
         </div>
         {user ? (
