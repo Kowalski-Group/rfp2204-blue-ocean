@@ -6,8 +6,9 @@ import Confetti from "react-confetti";
 import Image from "next/image";
 
 import Layout from "../components/Layout/Layout";
+import useRecorder from "./api/useRecorder";
 
-export default function play() {
+export default function Play() {
   const opts = {
     playerVars: {
       controls: 1,
@@ -18,7 +19,7 @@ export default function play() {
   };
 
   const { width, height } = useWindowSize();
-
+  const [audioURL, isRecording, startRecording, stopRecording] = useRecorder();
   return (
     <Layout>
       <div className='relative w-[100vw] h-[80vh] flex items-center justify-center'>
@@ -34,6 +35,17 @@ export default function play() {
           videoId='rMSQwIp4Jg8'
           opts={opts}
         />
+      </div>
+      <div>
+        <audio src={audioURL} controls>
+          <track kind='captions' />
+        </audio>
+        <button type='button' onClick={startRecording} disabled={isRecording}>
+          start recording
+        </button>
+        <button type='button' onClick={stopRecording} disabled={!isRecording}>
+          stop recording
+        </button>
       </div>
     </Layout>
   );
