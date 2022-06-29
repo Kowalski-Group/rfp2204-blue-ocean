@@ -5,7 +5,7 @@ import React from 'react';
 // import Container from '../components/Container/Container';
 import SearchBar from '../components/SearchBar';
 
-export default function Home() {
+export default function Search() {
 	return (
 		<div className='flex'>
 			<SearchBar />

@@ -1,3 +1,4 @@
+/* eslint-disable react/no-array-index-key */
 import React, { useState, useEffect } from 'react';
 
 import axios from 'axios';
@@ -7,43 +8,43 @@ export default function SearchBar() {
 	// const [dataSongs, setDataSongs] = useState(null);
 	const [text, setText] = useState('');
 	const [suggestions, setSuggestions] = useState([]);
-	const currentTitles = [];
 
 	useEffect(() => {
-		const loadData = async (nextToken) => {
+		const currentTitles = [];
+		const loadData = async (nextKey) => {
 			const response = await axios.get(
 				'https://www.googleapis.com/youtube/v3/search',
 				{
 					params: {
 						part: 'snippet',
 						channelId: 'UCbqcG1rdt9LMwOJN4PyGTKg',
-						maxResults: 10000,
+						maxResults: 100,
 						order: 'viewCount',
 						type: 'video',
-						key: 'AIzaSyDRPMMIJxU9Bveb5u45mUafAykU35xKqt0',
-						pageToken: nextToken,
+						key: 'AIzaSyArn-2Zmkc7rIZNrF2Ie2I2tMzpdOVMwt8',
+						nextPageToken: nextKey,
 					},
 				}
 			);
 			try {
 				console.log(response.data);
-				for (let i = 0; i < response.data.items.length; i + 1) {
+				for (let i = 0; i < response.data.items.length; i += 1) {
 					currentTitles.push(response.data.items[i].snippet.title);
 				}
 			} catch (error) {
 				console.log(error);
 			}
 
-			console.log('current Pull Titles', currentTitles);
+			// console.log('current Pull Titles', currentTitles);
 			setVideoTitles(currentTitles);
-			console.log('Actual state titles', videoTitles);
 			if (response.data.nextPageToken) {
 				loadData(response.data.nextPageToken);
 			}
+			// console.log(videoTitles);
 		};
 
 		loadData();
-	});
+	}, []);
 
 	// if the response object has a nextPage key,
 	// call again
@@ -69,9 +70,7 @@ export default function SearchBar() {
 				value={text}
 			/>
 			{suggestions &&
-				suggestions.map((suggestion) => (
-					<div key={suggestion}> {suggestion} </div>
-				))}
+				suggestions.map((suggestion, i) => <div key={i}> {suggestion} </div>)}
 		</div>
 	);
 }
