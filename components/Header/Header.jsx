@@ -2,6 +2,7 @@ import React from "react";
 
 import { useUser } from "@auth0/nextjs-auth0";
 import Image from "next/image";
+import Profile from "../Profile/Profile";
 
 function Header() {
   const { user } = useUser();
@@ -28,14 +29,17 @@ function Header() {
           </div>
         </div>
         {user ? (
-          <div className="self-center border-2 rounded-md hover:bg-white hover:text-indigo-700 ml-5">
-            <a
-              className="text-xl ml-3 mr-3"
-              href="/api/auth/logout"
-              data-testid="logout"
-            >
-              Logout
-            </a>
+          <div className="flex flex-row justify-end self-center text-xl float-right min-w-fit">
+            <Profile />
+            <div className="self-center border-2 rounded-md hover:bg-white hover:text-indigo-700 ml-5">
+              <a
+                className="text-xl ml-3 mr-3"
+                href="/api/auth/logout"
+                data-testid="logout"
+              >
+                Logout
+              </a>
+            </div>
           </div>
         ) : (
           <div className="float-right top-12 right-10 self-center border-2 rounded-md hover:bg-white hover:text-indigo-700 justify-self-end ml-5">

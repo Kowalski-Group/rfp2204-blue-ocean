@@ -1,9 +1,9 @@
-import React from 'react';
+import React from "react";
 // import Head from 'next/head';
 
 // import Layout from '../components/Layout/Layout';
 // import Container from '../components/Container/Container';
-import SearchBar from '../components/SearchBar';
+import SearchBar from "../components/SearchBar";
 
 export default function Search() {
 	return (
