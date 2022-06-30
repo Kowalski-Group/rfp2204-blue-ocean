@@ -8,7 +8,7 @@ function Header() {
   const { user } = useUser();
 
   return (
-    <header className="bg-indigo-700 text-white py-4 px-4">
+    <header className="fixed z-10 w-full bg-indigo-700 text-white py-4 px-4">
       <div className="flex flex-row justify-between">
         <div className="grid grid-flow-col auto-cols-max gap-2">
           <div className="w-16 relative">
