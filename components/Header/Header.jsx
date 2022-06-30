@@ -1,27 +1,33 @@
 import React from "react";
 
 import { useUser } from "@auth0/nextjs-auth0";
-import Image from "next/image";
+// import Image from "next/image";
 import Profile from "../Profile/Profile";
 
 function Header() {
   const { user } = useUser();
 
   return (
-    <header className="fixed z-10 w-full bg-indigo-700 text-white py-4 px-4">
+    <header className="fixed z-20 w-full bg-indigo-700 text-white py-4 px-4">
       <div className="flex flex-row justify-between">
         <div className="grid grid-flow-col auto-cols-max gap-2">
           <div className="w-16 relative">
-            <Image
+            {/* <Image
               src="/logo-avatar.png"
               alt="logo"
               layout="fill"
               objectFit="contain"
               className="rounded-full col-start-1"
-            />
+            /> */}
+            <p className="flex w-full h-full items-center justify-center text-5xl">
+              🎤
+            </p>
           </div>
           <div className="col-span-3">
-            <h1 className="text-3xl font-Audiowide"> Sweet Niblets</h1>
+            <h1 className="text-3xl font-Audiowide font-bold tracking-wide uppercase">
+              {" "}
+              Sweet Niblets
+            </h1>
 
             <p className="text-sm uppercase tracking-widest">
               Let&apos;s sing together
@@ -31,9 +37,9 @@ function Header() {
         {user ? (
           <div className="flex flex-row justify-end self-center text-xl float-right min-w-fit">
             <Profile />
-            <div className="self-center border-2 rounded-md hover:bg-white hover:text-indigo-700 ml-5">
+            <div className="self-center ml-5">
               <a
-                className="text-xl ml-3 mr-3"
+                className="bg-indigo-50 text-indigo-900 px-4 py-2 text-lg lowercase rounded-full hover:bg-indigo-200 transition-colors duration-200 ease-out text-left"
                 href="/api/auth/logout"
                 data-testid="logout"
               >
@@ -42,9 +48,9 @@ function Header() {
             </div>
           </div>
         ) : (
-          <div className="float-right top-12 right-10 self-center border-2 rounded-md hover:bg-white hover:text-indigo-700 justify-self-end ml-5">
+          <div className="float-right top-12 right-10 self-center justify-self-end ml-5">
             <a
-              className="text-xl ml-3 mr-3"
+              className="bg-indigo-50 text-indigo-900 px-4 py-2 text-lg lowercase rounded-full hover:bg-indigo-200 transition-colors duration-200 ease-out text-left"
               href="/api/auth/login"
               data-testid="login"
             >
