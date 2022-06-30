@@ -19,6 +19,7 @@
 		"@auth0/nextjs-auth0": "^1.9.1",
 		"axios": "^0.27.2",
 		"face-api.js": "^0.22.2",
+		"framer-motion": "^6.3.16",
 		"mongodb": "^4.7.0",
 		"next": "latest",
 		"prettier": "^2.7.1",

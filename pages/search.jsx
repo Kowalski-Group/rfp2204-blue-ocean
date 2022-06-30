@@ -1,9 +1,7 @@
+/* eslint-disable import/no-named-as-default-member */
 /* eslint-disable jsx-a11y/media-has-caption */
 import React from 'react';
-// import Head from 'next/head';
 
-// import Layout from '../components/Layout/Layout';
-// import Container from '../components/Container/Container';
 import SearchBar from '../components/SearchBar';
 
 export default function Search() {
