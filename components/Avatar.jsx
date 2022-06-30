@@ -29,7 +29,7 @@ export default function Avatar() {
     const rightEyeEl = rightEyeRef.current;
     const faceRect = faceEl.getBoundingClientRect();
 
-    const pagePercent = (faceRect.x - faceRect.width) / width;
+    const pagePercent = faceRect.x / width;
     let angleInDeg = pagePercent * 180 - 90;
     if (angleInDeg > 90) angleInDeg = 90;
     if (angleInDeg < -90) angleInDeg = -90;
