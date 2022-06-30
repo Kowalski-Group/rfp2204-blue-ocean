@@ -1,8 +1,9 @@
-import React, { useRef } from "react";
+import React, { useRef, useState } from "react";
 import { useWindowSize } from "react-use";
 
 import * as faceapi from "face-api.js";
 import Webcam from "./Webcam";
+import Loader from "./Loader";
 
 export default function Avatar() {
   const { width, height } = useWindowSize();
@@ -14,6 +15,7 @@ export default function Avatar() {
   const rightEyeBrow = useRef(null);
   const leftEyeRef = useRef(null);
   const rightEyeRef = useRef(null);
+  const [isLoading, setIsLoading] = useState(true);
 
   const updateAvatar = (video, positions) => {
     if (!positions) return;
@@ -81,6 +83,9 @@ export default function Avatar() {
         .withFaceExpressions();
 
       const resizedDetections = faceapi.resizeResults(detections, displaySize);
+      if (isLoading) {
+        setIsLoading(false);
+      }
 
       // UNCOMMENT BELOW LINES TO SHOW DETECTION POINTS
       // canvas.getContext("2d").clearRect(0, 0, canvas.width, canvas.height);
@@ -95,9 +100,13 @@ export default function Avatar() {
     }, 250);
   };
 
+  const handleVideoPlay = () => {
+    onPlay();
+  };
+
   return (
     <div className="absolute top-0 left-0 right-0 bottom-0">
-      <Webcam videoRef={videoRef} onPlay={onPlay} />
+      <Webcam videoRef={videoRef} onPlay={handleVideoPlay} />
       <canvas
         ref={canvasRef}
         className="absolute top-0 left-0 right-0 bottom-0"
@@ -135,7 +144,16 @@ export default function Avatar() {
           <div className="absolute w-4 h-4 mb-4 mr-4 bg-indigo-100 rounded-full" />
         </div>
         {/* nose */}
-        <div className="absolute w-4 h-2 top-1/2 left-1/2 -ml-2 mt-1 bg-indigo-100 rounded-full" />
+        {isLoading ? (
+          <div className="absolute top-1/2 left-0 right-0 mx-auto text-center z-50">
+            <Loader />
+            <p className="bg-indigo-100 mt-2 text-sm text-indigo-900 text-center uppercase tracking-wider">
+              Facial Recognition is Loading
+            </p>
+          </div>
+        ) : (
+          <div className="absolute w-4 h-2 top-1/2 left-1/2 -ml-2 mt-1 bg-indigo-100 rounded-full" />
+        )}
         {/* mouth */}
         <div
           ref={mouth}

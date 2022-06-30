@@ -46,14 +46,10 @@ export default function Webcam({ onPlay, videoRef }) {
     setupWebcamVideo();
   });
 
-  const onVideoPlay = () => {
-    onPlay();
-  };
-
   return (
     <div className="w-full h-full relative z-0">
       <video
-        onPlay={onVideoPlay}
+        onPlay={onPlay}
         className="w-full h-full mx-auto object-cover opacity-0"
         ref={videoRef}
         autoPlay
