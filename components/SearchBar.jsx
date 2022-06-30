@@ -13,47 +13,51 @@ export default function SearchBar() {
 	const [suggestedId, setSuggestedId] = useState([null]);
 	const [text, setText] = useState('');
 	const [suggestions, setSuggestions] = useState([]);
-	// const value = useContext(videoIdContext);
 
-	// const currentTitles = [];
-
+	const currentTitles = [];
+	const counter = 0;
 	// useEffect(() => {
-	//   const loadData = async (token) => {
-	//     const response = await axios.get(
-	//       "https://www.googleapis.com/youtube/v3/search",
-	//       {
-	//         params: {
-	//           part: "snippet",
-	//           channelId: "UCYi9TC1HC_U2kaRAK6I4FSQ",
-	//           maxResults: 10000,
-	//           order: "viewCount",
-	//           type: "video",
-	//           key: "AIzaSyAZC_LPCG9xAtRzJgiKvleelYKIoIQrDls",
-	//           nextPageToken: token,
-	//         },
-	//       }
-	//     );
-	//     try {
-	//       console.log(response.data);
-	//       // eslint-disable-next-line no-plusplus
-	//       for (let i = 0; i < response.data.items.length; i++) {
-	//         currentTitles.push({
-	//           title: response.data.items[i].snippet.title,
-	//           id: response.data.items[i].id.videoId,
-	//         });
-	//       }
-	//     } catch (error) {
-	//       console.log(error);
-	//     }
+	// 	const loadData = async (token) => {
+	// 		counter++;
+	// 		const response = await axios.get(
+	// 			'https://www.googleapis.com/youtube/v3/search',
+	// 			{
+	// 				params: {
+	// 					part: 'snippet',
+	// 					channelId: 'UCYi9TC1HC_U2kaRAK6I4FSQ',
+	// 					maxResults: 10000,
+	// 					order: 'viewCount',
+	// 					type: 'video',
+	// 					key: 'AIzaSyBQMswsGngMimJXqKjqT22HtndmFc18zmY',
+	// 					pageToken: token,
+	// 				},
+	// 			}
+	// 		);
+	// 		try {
+	// 			console.log(response.data);
+	// 			// eslint-disable-next-line no-plusplus
+	// 			for (let i = 0; i < response.data.items.length; i++) {
+	// 				currentTitles.push({
+	// 					title: response.data.items[i].snippet.title,
+	// 					id: response.data.items[i].id.videoId,
+	// 				});
+	// 			}
+	// 		} catch (error) {
+	// 			console.log(error);
+	// 		}
 
-	//     console.log("current Pull Titles", currentTitles);
-	//     setVideoTitles(currentTitles);
-	//     if (response.data.nextPageToken) {
-	//       loadData(response.data.nextPageToken);
-	//     }
-	//   };
+	// 		console.log('current Pull Titles', currentTitles);
+	// 		console.log('response object per page', response.data);
+	// 		setVideoTitles(currentTitles);
+	// 		if (response.data.nextPageToken) {
+	// 			loadData(response.data.nextPageToken);
+	// 		}
+	// 		// if (counter < 2) {
+	// 		// 	loadData(response.data.nextPageToken);
+	// 		// }
+	// 	};
 
-	//   loadData();
+	// 	loadData();
 	// }, []);
 
 	// if the response object has a nextPage key,
@@ -76,7 +80,7 @@ export default function SearchBar() {
 		setSuggestedId(suggestion.id);
 		setSuggestions([]);
 	};
-	// const { changeVideoId } = value.changeVideoId;
+
 	const onSubmitHandler = (e) => {
 		e.preventDefault();
 		console.log(suggestedId);
