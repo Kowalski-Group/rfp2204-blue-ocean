@@ -2,6 +2,7 @@
 import React, { useState } from "react";
 import Confetti from "react-confetti";
 import { useWindowSize } from "react-use";
+import { useUser } from "@auth0/nextjs-auth0";
 import RecordButton from "../components/RecordButton";
 import AudioDrawer from "../components/AudioDrawer";
 import Layout from "../components/Layout/Layout";
@@ -11,8 +12,9 @@ import Button from "../components/Button/Button";
 
 export default function Play() {
   const { width, height } = useWindowSize();
+  const { user } = useUser();
+  console.log(user);
 
-  // const { width, height } = useWindowSize();
   const [audioURL, isRecording, startRecording, stopRecording] = useRecorder();
   const [showAudioDrawer, setShowAudioDrawer] = useState(false);
   const [showConfetti, setShowConfetti] = useState(false);
@@ -38,7 +40,7 @@ export default function Play() {
 
   return (
     <Layout>
-      <div className="relative bg-indigo-100 flex flex-col items-center px-[20%] pt-36 h-[100vh] overflow-hidden">
+      <div className="relative bg-indigo-100 flex flex-col items-center px-[20%] pt-[20vh] h-[100vh] overflow-hidden">
         <Avatar showAvatar={showAvatar} />
         {showConfetti && <Confetti width={width} height={height} />}
         <div className="video-wrapper">
@@ -48,6 +50,27 @@ export default function Play() {
             title="YouTube Player"
             allowFullScreen
           />
+          <p className="absolute -ml-[12rem] -mt-[8rem] text-[20rem] opacity-25 -rotate-12">
+            ⭐️
+          </p>
+          <p className="absolute top-[18rem] -ml-[16rem] text-[8rem] opacity-25 rotate-12">
+            ⭐️
+          </p>
+          <p className="absolute top-[26rem] -ml-[6rem] text-[6rem] opacity-25 -rotate-45">
+            ⭐️
+          </p>
+          <p className="absolute top-0 right-0 -mr-[16rem] -mt-[15rem] text-[25rem] opacity-25 rotate-45">
+            ⭐️
+          </p>
+          <p className="absolute right-0 top-[18rem] -mr-[16rem] text-[8rem] opacity-25 -rotate-12">
+            ⭐️
+          </p>
+          <p className="absolute bottom-0 right-0 -mr-[10rem] -mb-[18rem] text-[20rem] opacity-25">
+            💫
+          </p>
+          <p className="absolute bottom-0 right-0 font-Audiowide uppercase font-black -mr-[10rem] -mb-16 text-indigo-300 shadow-indigo-400 text-6xl opacity-50 -rotate-12">
+            Go {user ? user.given_name : "for it"}!
+          </p>
         </div>
         {showAudioDrawer && <AudioDrawer audioURL={audioURL} />}
         <RecordButton handleClick={handleRecordClicked} />
