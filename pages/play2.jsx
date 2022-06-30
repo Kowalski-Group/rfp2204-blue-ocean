@@ -1,7 +1,8 @@
 /* eslint-disable react-hooks/rules-of-hooks */
-import React from "react";
+import React, { useState } from "react";
 // import { useWindowSize } from "react-use";
 import RecordButton from "../components/RecordButton";
+import AudioDrawer from "../components/AudioDrawer";
 
 import Layout from "../components/Layout/Layout";
 import useRecorder from "./api/useRecorder";
@@ -9,6 +10,17 @@ import useRecorder from "./api/useRecorder";
 export default function Play() {
   // const { width, height } = useWindowSize();
   const [audioURL, isRecording, startRecording, stopRecording] = useRecorder();
+  const [showAudioDrawer, setShowAudioDrawer] = useState(false);
+
+  const handleRecordClicked = () => {
+    if (!isRecording) {
+      startRecording();
+      setShowAudioDrawer(false);
+    } else {
+      stopRecording();
+      setShowAudioDrawer(true);
+    }
+  };
 
   return (
     <Layout>
@@ -22,14 +34,8 @@ export default function Play() {
             allowFullScreen
           />
         </div>
-        <div>
-          <audio src={audioURL} controls>
-            <track kind="captions" />
-          </audio>
-        </div>
-        <RecordButton
-          handleClick={!isRecording ? startRecording : stopRecording}
-        />
+        {showAudioDrawer && <AudioDrawer audioURL={audioURL} />}
+        <RecordButton handleClick={handleRecordClicked} />
       </div>
     </Layout>
   );
