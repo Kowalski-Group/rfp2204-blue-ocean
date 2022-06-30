@@ -115,7 +115,7 @@ export default function Avatar({ showAvatar }) {
   const returnAvatar = () => (
     <div
       ref={face}
-      className={`absolute left-0 right-0 bottom-auto top-36 mx-auto bg-indigo-700 w-44 h-60 rounded-full transition-all duration-500 ease-in-out border-4 border-indigo-100 overflow-hidden z-50 ${opacityString}`}
+      className={`absolute left-0 right-0 bottom-auto top-36 mx-auto bg-indigo-700 w-44 h-60 rounded-full transition-all duration-500 ease-in-out border-4 border-indigo-100 overflow-hidden z-50 ${opacityString} pointer-events-none`}
     >
       {/* hair 1 */}
       <div className="absolute bg-indigo-200 rounded-full w-full h-2/3 -mt-20 -ml-16" />
