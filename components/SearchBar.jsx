@@ -13,17 +13,18 @@ export default function SearchBar() {
 	// const value = useContext(videoIdContext);
 	useEffect(() => {
 		const currentTitles = [];
-		const loadData = async () => {
+		const loadData = async (token) => {
 			const response = await axios.get(
 				'https://www.googleapis.com/youtube/v3/search',
 				{
 					params: {
 						part: 'snippet',
-						channelId: 'UCs1iHvVzTgQn24Xy53E0jjw',
-						maxResults: 100,
+						channelId: 'UCbqcG1rdt9LMwOJN4PyGTKg',
+						maxResults: 10000,
 						order: 'viewCount',
 						type: 'video',
-						key: 'AIzaSyBZtg1ueYaasz7cRe48V6VARco6WoFaUH0',
+						key: 'AIzaSyDtmdx_GNC3vI1xt4Wrc-tqzxFIvyh9DZ4',
+						nextPageToken: token,
 					},
 				}
 			);
