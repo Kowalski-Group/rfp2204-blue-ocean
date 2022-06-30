@@ -83,10 +83,10 @@ export default function SearchBar() {
 		// changeVideoId(suggestedId);
 	};
 	return (
-		<div className='flex w-full h-full m-10' id='SearchBarWrapper'>
-			<form className='flex' onSubmit={(e) => onSubmitHandler(e)}>
+		<div className='flex-col w-1/6' id='SearchBarWrapper'>
+			<form className='flex columns-md' onSubmit={(e) => onSubmitHandler(e)}>
 				<input
-					className='flex self-center justify-self-center'
+					className='flex self-center justify-self-center w-full'
 					type='text'
 					onChange={(e) => onChangeHandler(e.target.value)}
 					value={text}
@@ -94,7 +94,10 @@ export default function SearchBar() {
 			</form>
 			{suggestions &&
 				suggestions.map((suggestion, i) => (
-					<div key={i} onClick={() => onSuggestHandler(suggestion)}>
+					<div
+						className='flex-col columns-md border-r border-l border-b border-black justify-content-center cursor-text'
+						key={i}
+						onClick={() => onSuggestHandler(suggestion)}>
 						{' '}
 						{suggestion.title}{' '}
 					</div>
