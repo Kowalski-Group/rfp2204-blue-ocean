@@ -54,7 +54,7 @@ export default function Webcam({ onPlay, videoRef }) {
     <div className="w-full h-full relative z-0">
       <video
         onPlay={onVideoPlay}
-        className="w-full h-full mx-auto object-cover opacity-25"
+        className="w-full h-full mx-auto object-cover opacity-0"
         ref={videoRef}
         autoPlay
         muted
