@@ -6,7 +6,6 @@ import Webcam from "./Webcam";
 
 export default function Avatar() {
   const { width, height } = useWindowSize();
-  console.log("wh", width, height);
   const canvasRef = useRef(null);
   const videoRef = useRef(null);
   const face = useRef(null);
@@ -18,10 +17,8 @@ export default function Avatar() {
 
   const updateAvatar = (video, positions) => {
     if (!positions) return;
-    const nosePoint = positions[33];
+    const nosePoint = positions[34];
     const mouthHeight = positions[58].y - positions[52].y;
-    // const leftEyeBrowY = positions[20].y
-    // const rightEyeBrowY = positions[25].y
 
     if (!nosePoint || !video) return;
     const faceEl = face.current;
@@ -30,25 +27,33 @@ export default function Avatar() {
     const rightEyeBrowEl = rightEyeBrow.current;
     const leftEyeEl = leftEyeRef.current;
     const rightEyeEl = rightEyeRef.current;
-    // const midX = video.getBoundingClientRect().width / 2;
-    // const midY = video.getBoundingClientRect().height / 2;
     const faceRect = faceEl.getBoundingClientRect();
-    // const faceElInitialPos = faceEl.getBoundingClientRect();
-    // console.log(faceEl.style);
 
-    // console.log(nosePoint.x - faceElInitialPos.x);
-    // console.log(midX);
-    // faceEl.style.transform = `scale3d(2, 2, 1)`;
-    // console.log("faceRect", faceRect);
-    // console.log("nosePoint", nosePoint);
-    faceEl.style.transform = `translate3d(${
-      (nosePoint.x * 2 - width / 2 + faceRect.width / 2) * -1
-    }px, ${nosePoint.y * 2 - height / 2 + faceRect.height / 2}px, 0)`;
+    const pagePercent = faceRect.x / width;
+    let angleInDeg = pagePercent * 180 - 90;
+    if (angleInDeg > 90) angleInDeg = 90;
+    if (angleInDeg < -90) angleInDeg = -90;
+    const xTranslate = (
+      (nosePoint.x - width / 2 - faceRect.width / 2) *
+      -1
+    ).toFixed(0);
+    const yTranslate = (nosePoint.y - height / 2 + faceRect.height / 2).toFixed(
+      0
+    );
+
+    faceEl.style.transform = `translate3d(${xTranslate}px, ${yTranslate}px, 0) rotate3d(0, 0, 1, ${angleInDeg.toFixed(
+      0
+    )}deg)`;
+
     mouthEl.style.height = `${Math.min(mouthHeight / 12, 6)}rem`;
-    leftEyebrowEl.style.transform = `translate3d(0, ${mouthHeight * -1}px, 0)`;
-    rightEyeBrowEl.style.transform = `translate3d(0, ${mouthHeight * -1}px, 0)`;
 
-    // leftEyeEl.style.height = mouthHeight / 4
+    leftEyebrowEl.style.transform = `translate3d(0, ${
+      mouthHeight * -1
+    }px, 0) rotate3d(0, 0, 1, -6deg)`;
+    rightEyeBrowEl.style.transform = `translate3d(0, ${
+      mouthHeight * -1
+    }px, 0) rotate3d(0, 0, 1, 6deg)`;
+
     leftEyeEl.style.transform = `scale3d(1, ${Math.min(
       30 / mouthHeight,
       1
@@ -57,13 +62,9 @@ export default function Avatar() {
       30 / mouthHeight,
       1
     )}, 1)`;
-    // mouthEl.style.transform = `scale3d(1, ${mouthHeight / 12}, 1)`;
   };
 
   const onPlay = () => {
-    // console.log("video play event");
-    // console.log("canvas", canvasRef.current);
-
     setInterval(async () => {
       const canvas = canvasRef.current;
       if (!videoRef) return;
@@ -79,14 +80,17 @@ export default function Avatar() {
         .withFaceLandmarks()
         .withFaceExpressions();
 
-      // const resizedDetections = faceapi.resizeResults(detections, displaySize);
+      const resizedDetections = faceapi.resizeResults(detections, displaySize);
+
+      // UNCOMMENT BELOW LINES TO SHOW DETECTION POINTS
       // canvas.getContext("2d").clearRect(0, 0, canvas.width, canvas.height);
       // faceapi.draw.drawDetections(canvas, resizedDetections);
       // faceapi.draw.drawFaceLandmarks(canvas, resizedDetections);
       // faceapi.draw.drawFaceExpressions(canvas, resizedDetections);
 
-      const positions = detections[0]?.landmarks.positions;
+      const positions = resizedDetections[0]?.landmarks.positions;
 
+      // Animate avatar position
       updateAvatar(video, positions);
     }, 250);
   };
@@ -100,12 +104,12 @@ export default function Avatar() {
       />
       <div
         ref={face}
-        className="absolute left-0 right-0 bottom-auto top-36 mx-auto bg-indigo-700 w-44 h-60 rounded-full transition-transform duration-500 ease-in-out border-4 border-indigo-100 overflow-hidden z-50"
+        className="absolute left-0 right-0 bottom-auto top-36 mx-auto bg-indigo-700 w-44 h-60 rounded-full transition-transform duration-500 ease-in-out border-4 border-indigo-100 overflow-hidden z-50 opacity-90"
       >
-        {/* hair */}
-        <div className="absolute -top-1/3 bg-indigo-200 rounded-full w-full h-2/3 -mt-20 -ml-16 z-50" />
-        {/* hair */}
-        {/* <div className="absolute bg-indigo-200 rounded-full w-full h-2/3 -mt-18 -mr-24 z-50" /> */}
+        {/* hair 1 */}
+        <div className="absolute bg-indigo-200 rounded-full w-full h-2/3 -mt-20 -ml-16" />
+        {/* hair 2 */}
+        <div className="absolute bg-indigo-200 rounded-full w-full h-2/3 -mt-20 -right-24" />
         {/* left eye */}
         <div
           ref={leftEyeRef}
@@ -113,7 +117,7 @@ export default function Avatar() {
         >
           <div
             ref={leftEyebrow}
-            className="absolute h-4 w-8 -top-4 left-0 right-0 mx-auto bg-indigo-100 rounded-full border-2 border-indigo-700 transition-transform duration-500 ease-in-out"
+            className="absolute h-4 w-8 -top-4 left-0 right-0 mx-auto bg-indigo-100 rounded-full border-2 border-indigo-700 transition-transform duration-500 ease-in-out -rotate-6"
           />
           <div className="absolute w-8 h-8 bg-indigo-800 rounded-full" />
           <div className="absolute w-4 h-4 mb-4 mr-4 bg-indigo-100 rounded-full" />
@@ -125,7 +129,7 @@ export default function Avatar() {
         >
           <div
             ref={rightEyeBrow}
-            className="absolute h-4 w-8 -top-4 left-0 right-0 mx-auto bg-indigo-100 rounded-full border-2 border-indigo-700 transition-all duration-500 ease-in-out"
+            className="absolute h-4 w-8 -top-4 left-0 right-0 mx-auto bg-indigo-100 rounded-full border-2 border-indigo-700 transition-all duration-500 ease-in-out rotate-6"
           />
           <div className="absolute w-8 h-8 bg-indigo-800 rounded-full" />
           <div className="absolute w-4 h-4 mb-4 mr-4 bg-indigo-100 rounded-full" />
