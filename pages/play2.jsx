@@ -1,3 +1,4 @@
+/* eslint-disable jsx-a11y/click-events-have-key-events */
 /* eslint-disable react-hooks/rules-of-hooks */
 import React, { useState } from "react";
 import Confetti from "react-confetti";
@@ -24,6 +25,7 @@ export default function Play() {
   const [suggestedId, setSuggestedId] = useState(["KXrKCVILWN8"]);
   const [text, setText] = useState("");
   const [suggestions, setSuggestions] = useState([]);
+  const [showSearchResults, setShowSearchResults] = useState(false);
 
   const handleRecordClicked = () => {
     if (!isRecording) {
@@ -46,19 +48,23 @@ export default function Play() {
   const onChangeHandler = (words) => {
     let matches = [];
     if (words.length > 0) {
+      setShowSearchResults(true);
       matches = videoTitles.filter((title) => {
         const regex = new RegExp(`${words}`, "gi");
         return title.title.match(regex);
       });
+    } else {
+      setShowSearchResults(false);
     }
     console.log("matches", matches);
     setSuggestions(matches);
     setText(words);
   };
   const onSuggestHandler = (suggestion) => {
-    setText(suggestion.title);
+    setText("");
     setSuggestedId(suggestion.id);
     setSuggestions([]);
+    setShowSearchResults(false);
   };
   // const { changeVideoId } = value.changeVideoId;
   const onSubmitHandler = (e) => {
@@ -81,22 +87,24 @@ export default function Play() {
           value={text}
         />
       </form>
-      <div className="absolute border-2 border-indigo-700 mt-2 bg-indigo-100 z-50 rounded-3xl shadow-indigo-600 overflow-hidden">
-        <div className="h-64 overflow-y-scroll overflow-x-hidden">
-          {suggestions &&
-            suggestions.map((suggestion) => (
-              <button
-                type="button"
-                className="w-full text-left px-4 py-1 hover:bg-indigo-200 cursor-pointer"
-                key={suggestion}
-                onClick={() => onSuggestHandler(suggestion)}
-              >
-                {" "}
-                {suggestion.title}{" "}
-              </button>
-            ))}
+      {showSearchResults && (
+        <div className="absolute border-2 border-indigo-700 mt-2 bg-indigo-100 z-50 rounded-3xl shadow-indigo-600 overflow-hidden">
+          <div className="max-h-64 overflow-y-scroll overflow-x-hidden">
+            {suggestions &&
+              suggestions.map((suggestion) => (
+                <button
+                  type="button"
+                  className="w-full text-left px-4 py-1 hover:bg-indigo-200 cursor-pointer"
+                  key={suggestion}
+                  onClick={() => onSuggestHandler(suggestion)}
+                >
+                  {" "}
+                  {suggestion.title}{" "}
+                </button>
+              ))}
+          </div>
         </div>
-      </div>
+      )}
     </div>
   );
 
