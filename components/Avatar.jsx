@@ -42,7 +42,7 @@ export default function Avatar() {
     // console.log("faceRect", faceRect);
     // console.log("nosePoint", nosePoint);
     faceEl.style.transform = `translate3d(${
-      nosePoint.x * 2 - width / 2 + faceRect.width / 2
+      (nosePoint.x * 2 - width / 2 + faceRect.width / 2) * -1
     }px, ${nosePoint.y * 2 - height / 2 + faceRect.height / 2}px, 0)`;
     mouthEl.style.height = `${Math.min(mouthHeight / 12, 6)}rem`;
     leftEyebrowEl.style.transform = `translate3d(0, ${mouthHeight * -1}px, 0)`;
