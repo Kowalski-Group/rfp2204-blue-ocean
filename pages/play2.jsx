@@ -16,6 +16,7 @@ export default function Play() {
   const [audioURL, isRecording, startRecording, stopRecording] = useRecorder();
   const [showAudioDrawer, setShowAudioDrawer] = useState(false);
   const [showConfetti, setShowConfetti] = useState(false);
+  const [showAvatar, setShowAvatar] = useState(true);
 
   const handleRecordClicked = () => {
     if (!isRecording) {
@@ -31,10 +32,14 @@ export default function Play() {
     setShowConfetti(!showConfetti);
   };
 
+  const handleShowAvatarClicked = () => {
+    setShowAvatar(!showAvatar);
+  };
+
   return (
     <Layout>
       <div className="relative bg-indigo-100 flex flex-col items-center px-[20%] pt-36 h-[100vh] overflow-hidden">
-        <Avatar />
+        <Avatar showAvatar={showAvatar} />
         {showConfetti && <Confetti width={width} height={height} />}
         <div className="video-wrapper">
           <iframe
@@ -46,10 +51,14 @@ export default function Play() {
         </div>
         {showAudioDrawer && <AudioDrawer audioURL={audioURL} />}
         <RecordButton handleClick={handleRecordClicked} />
-        <div className="absolute left-2 bottom-2 flex flex-col">
+        <div className="absolute left-4 bottom-4 flex flex-col gap-2">
           <Button
             handleClick={handleShowConfettiClicked}
             buttonText={showConfetti ? "🚫 Confetti" : "🎊 Confetti"}
+          />
+          <Button
+            handleClick={handleShowAvatarClicked}
+            buttonText={showAvatar ? "🚫 Avatar" : "🥳 Avatar"}
           />
         </div>
       </div>
