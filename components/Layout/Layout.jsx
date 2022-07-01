@@ -7,6 +7,7 @@ function Layout({ children }) {
   return (
     <div className="flex flex-col">
       <Head>
+        <title>Sweet Niblets</title>
         <link rel="icon" href="/favicon.ico" />
       </Head>
       <Header />

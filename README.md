@@ -1,3 +1,12 @@
+# 🎤 Sweet Niblets
+
+Singing in Augmented Reality!
+
+![App Demo](public/sweetniblets.gif)
+
+See it Live:
+https://sweet-niblets.vercel.app/sing
+
 # Kowalski dev initial setup
 
 This is to start dev initial setup to install all dependencies.

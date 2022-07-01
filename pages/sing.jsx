@@ -12,7 +12,7 @@ import Avatar from "../components/Avatar";
 import Button from "../components/Button/Button";
 import data from "../public/data/data";
 
-export default function Play() {
+export default function Sing() {
   const { width, height } = useWindowSize();
   const { user } = useUser();
 
